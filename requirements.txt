@@ -1,0 +1,7 @@
+
+pyqt5
+numpy==1.19.5
+tensorflow==2.4.1
+requests
+bs4
+lxml
