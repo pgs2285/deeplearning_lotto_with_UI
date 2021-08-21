@@ -1,4 +1,3 @@
-from itertools import count
 from PyQt5.QtWidgets import QMainWindow
 import numpy as np
 import tensorflow as tf
@@ -17,7 +16,7 @@ from lottoUI_3 import Ui_MainWindow
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 import webbrowser
-
+import re
 
 class lottoProcess(QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -108,23 +107,26 @@ class lottoProcess(QMainWindow, Ui_MainWindow):
         for l in self.recommends:
             l.clear()    
         self.numberList = []
-        self.baseURL = 'https://superkts.com/lotto/list/?pg='
+        baseURL = 'https://superkts.com/lotto/list/?pg='
         self.progressBar.setProperty("value", 5)  
+        tmpList = []
+        count = 1
         for i in range(100):
-            try:
-                self.r = requests.get(url=self.baseURL+str(i))
-                self.soup = BeautifulSoup(self.r.content, "lxml")
-                self.table = self.soup.findAll('td',{'class':'no'})
-                for j in self.table:   
-                    j = j.get_text(' ')
-                    self.spl_table = j.split() 
-                    self.numberList.append(self.spl_table[:6])
-            except:
-                pass        
+                r = requests.get(url=baseURL+str(i+1))
+                soup = BeautifulSoup(r.content, "lxml")
+                table = soup.findAll('span',{'class':re.compile('n[0-9]')})
+                for j in table:   
+                    j = j.get_text()
+                    if count % 7 != 0:
+                        tmpList.append(int(j))
 
-        self.lottoNumbers = []
-        for i in self.numberList:
-            self.lottoNumbers.append(list(map(int, i)))
+                    else: 
+                        self.numberList.append(tmpList.copy());
+                        tmpList.clear()
+                        pass
+                    count += 1   
+
+        self.lottoNumbers = self.numberList
 
         self.progressBar.setProperty("value", 40)
         self.ohbins = list(map(self.numbers2ohbin, self.lottoNumbers)) # 원-핫 인코딩하기

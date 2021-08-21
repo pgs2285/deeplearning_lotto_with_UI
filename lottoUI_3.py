@@ -321,13 +321,11 @@ class Ui_MainWindow(object):
         self.menuBar = QtWidgets.QMenuBar(MainWindow)
         self.menuBar.setGeometry(QtCore.QRect(0, 0, 602, 21))
         self.menuBar.setObjectName("menuBar")
-        self.menu = QtWidgets.QMenu(self.menuBar)
-        self.menu.setObjectName("menu")
+
         MainWindow.setMenuBar(self.menuBar)
         self.action = QtWidgets.QAction(MainWindow)
         self.action.setObjectName("action")
-        self.menu.addAction(self.action)
-        self.menuBar.addAction(self.menu.menuAction())
+
         self.pushButton.setStyleSheet("background-image:url(./photo/button.png);")
         self.label.setPixmap(QtGui.QPixmap("./photo/main.png"))
         self.label_2.setPixmap(QtGui.QPixmap("./photo/output.png"))
@@ -361,8 +359,6 @@ class Ui_MainWindow(object):
         self.comboBox.setItemText(8, _translate("MainWindow", "9개 출력"))
         self.comboBox.setItemText(9, _translate("MainWindow", "10개 출력"))
         self.label_2.setText(_translate("MainWindow", ""))
-        self.menu.setTitle(_translate("MainWindow", "도움말"))
-        self.action.setText(_translate("MainWindow", "도움말"))
 
 
 if __name__ == "__main__":
