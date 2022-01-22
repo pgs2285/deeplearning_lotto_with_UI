@@ -10,8 +10,8 @@ tkinter를 이용한 GUI는 -> https://github.com/pgs2285/deepleaning_lotto_with
 
 **번호 1개 출력(확률가장 높은것들)**
 
-![](1개번호.gif)
+![](1_extract.gif)
 
 **번호 5개 출력**
 
-![](5개번호.gif)
+![](5_extract.gif)
